@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Kapitan Bomba</string>
+    <string name="text_main">Kapitan Bomba</string>
+    <string name="button_inventory">Ekwipunek</string>
+    <string name="button_battle">Walka</string>
+    <string name="button_stats">Statystyki</string>
+    <string name="button_createCharacter">Stwórz postać</string>
+    <string name="text_level">Poziom:</string>
+    <string name="text_str">"Siła: "</string>
+    <string name="text_dex">"Zręczność: "</string>
+    <string name="text_def">"Obrona: "</string>
+    <string name="text_resist">"Odporność: "</string>
+    <string name="text_int">"Inteligencja: "</string>
+    <string name="text_knowledge">"Wiedza: "</string>
+    <string name="text_charisma">"Charyzma: "</string>
+    <string name="button_description_add_skill">Ulepsz</string>
+    <string name="text_createCharacter">Tworzenie Postaci</string>
+    <string name="hint_name">Imię</string>
+    <string name="button_create">Stwórz</string>
+    <string name="text_delete">Usuń</string>
+    <string name="hint_addExp">Dodaj expa</string>
+    <string name="text_inventory">Ekwipunek</string>
+    <string name="text_stat_points">Skill Points:</string>
+    <string name="text_abilities">Umiejętności</string>
+</resources>
