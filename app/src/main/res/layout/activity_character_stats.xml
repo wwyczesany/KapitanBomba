@@ -121,6 +121,7 @@
                         android:layout_marginBottom="24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/exp_progress"
                         app:srcCompat="@drawable/poop" />
 
                     <ProgressBar
@@ -185,7 +186,8 @@
                         android:progress="1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/icon_exp" />
+                        app:layout_constraintStart_toEndOf="@+id/icon_exp"
+                        app:layout_constraintTop_toBottomOf="@+id/exp_progress" />
 
                     <TextView
                         android:id="@+id/level"
@@ -252,7 +254,7 @@
                         android:textColor="#bada55"
                         app:layout_constraintEnd_toEndOf="@+id/bar_exp"
                         app:layout_constraintStart_toStartOf="@+id/bar_exp"
-                        app:layout_constraintTop_toBottomOf="@+id/level_value"
+                        app:layout_constraintTop_toBottomOf="@+id/add_str3"
                         tools:text="666/666" />
 
                     <ImageButton
@@ -270,10 +272,24 @@
                         app:layout_constraintTop_toBottomOf="@+id/bar_kutas"
                         app:srcCompat="@drawable/plus" />
 
+                    <ImageButton
+                        android:id="@+id/add_str3"
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:adjustViewBounds="false"
+                        android:background="@android:color/transparent"
+                        android:onClick="increaseExperience"
+                        android:scaleType="fitStart"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/add_str2"
+                        app:srcCompat="@drawable/plus" />
+
                     <EditText
                         android:id="@+id/input_exp_amount"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"

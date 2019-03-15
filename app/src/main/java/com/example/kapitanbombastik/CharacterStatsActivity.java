@@ -2,16 +2,20 @@ package com.example.kapitanbombastik;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -171,11 +175,73 @@ public class CharacterStatsActivity extends AppCompatActivity {
 
             constraintSet.constrainHeight(textName.getId() , ConstraintSet.WRAP_CONTENT);
             constraintSet.constrainWidth(textName.getId() , ConstraintSet.WRAP_CONTENT);
-            constraintSet.connect(textName.getId() , ConstraintSet.LEFT , ConstraintSet.PARENT_ID , ConstraintSet.LEFT , 8);
-            constraintSet.connect(textName.getId() , ConstraintSet.TOP , ConstraintSet.PARENT_ID , ConstraintSet.TOP , 8);
-            constraintSet.connect(textName.getId() , ConstraintSet.BOTTOM , ConstraintSet.PARENT_ID , ConstraintSet.BOTTOM , 8);
+            constraintSet.connect(textName.getId() , ConstraintSet.LEFT , ConstraintSet.PARENT_ID , ConstraintSet.LEFT , convertDpToPx(8));
+            constraintSet.connect(textName.getId() , ConstraintSet.TOP , ConstraintSet.PARENT_ID , ConstraintSet.TOP , convertDpToPx(8));
+            constraintSet.connect(textName.getId() , ConstraintSet.BOTTOM , ConstraintSet.PARENT_ID , ConstraintSet.BOTTOM , convertDpToPx(8));
 
             //Adding Upgrade Button
+            ImageButton imageButton = new ImageButton(this);
+            imageButton.setId(R.id.skillUpgradeButton);
+            imageButton.setBackgroundColor(Color.TRANSPARENT);
+            imageButton.setImageResource(R.drawable.plus);
+            imageButton.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageButton.setPadding(0,0,0,0);
+
+
+
+            constraintLayout.addView(imageButton);
+
+            constraintSet.constrainHeight(imageButton.getId() , convertDpToPx(19) );
+            constraintSet.constrainWidth(imageButton.getId() , convertDpToPx(19) );
+            constraintSet.connect(imageButton.getId() , ConstraintSet.RIGHT , ConstraintSet.PARENT_ID , ConstraintSet.RIGHT , convertDpToPx(8));
+            constraintSet.connect(imageButton.getId() , ConstraintSet.TOP , ConstraintSet.PARENT_ID , ConstraintSet.TOP , convertDpToPx(8));
+            constraintSet.connect(imageButton.getId() , ConstraintSet.BOTTOM , ConstraintSet.PARENT_ID , ConstraintSet.BOTTOM , convertDpToPx(8));
+
+            //Adding Level Value
+            TextView textLevelValue = new TextView(this);
+            textLevelValue.setText(Integer.toString(s.getLevel()));
+            textLevelValue.setId(R.id.skillLevelValue);
+            textLevelValue.setTextColor(getResources().getColor(R.color.BADASS));
+            textLevelValue.setTextSize(16);
+            constraintLayout.addView(textLevelValue);
+
+            constraintSet.constrainHeight(textLevelValue.getId() , ConstraintSet.WRAP_CONTENT);
+            constraintSet.constrainWidth(textLevelValue.getId() , ConstraintSet.WRAP_CONTENT);
+            constraintSet.connect(textLevelValue.getId() , ConstraintSet.RIGHT, imageButton.getId() , ConstraintSet.LEFT, convertDpToPx(8));
+            constraintSet.connect(textLevelValue.getId() , ConstraintSet.TOP , ConstraintSet.PARENT_ID , ConstraintSet.TOP , convertDpToPx(8));
+            constraintSet.connect(textLevelValue.getId() , ConstraintSet.BOTTOM , ConstraintSet.PARENT_ID , ConstraintSet.BOTTOM , convertDpToPx(8));
+
+            //Adding Level Text
+            TextView textLevel = new TextView(this);
+            textLevel.setText(R.string.text_level);
+            textLevel.setId(R.id.skillLevelText);
+            textLevel.setTextSize(16);
+            textLevel.setTextColor(getResources().getColor(R.color.ASS));
+            constraintLayout.addView(textLevel);
+
+            constraintSet.constrainHeight(textLevel.getId() , ConstraintSet.WRAP_CONTENT);
+            constraintSet.constrainWidth(textLevel.getId() , ConstraintSet.WRAP_CONTENT);
+            constraintSet.connect(textLevel.getId() , ConstraintSet.RIGHT , textLevelValue.getId() , ConstraintSet.LEFT , convertDpToPx(8));
+            constraintSet.connect(textLevel.getId() , ConstraintSet.TOP , ConstraintSet.PARENT_ID , ConstraintSet.TOP , convertDpToPx(8));
+            constraintSet.connect(textLevel.getId() , ConstraintSet.BOTTOM , ConstraintSet.PARENT_ID , ConstraintSet.BOTTOM , convertDpToPx(8));
+
+            //Adding Skill Description
+            TextView textDescription = new TextView(this);
+            textDescription.setText(s.getDescription());
+            textDescription.setId(R.id.skillDescription);
+            textDescription.setTextSize(16);
+            textDescription.setTextColor(getResources().getColor(R.color.BADASS));
+            constraintLayout.addView(textDescription);
+
+            constraintSet.constrainHeight(textDescription.getId() , ConstraintSet.WRAP_CONTENT);
+            constraintSet.constrainWidth(textDescription.getId() , ConstraintSet.MATCH_CONSTRAINT);
+            constraintSet.connect(textDescription.getId() , ConstraintSet.RIGHT ,textLevel.getId() , ConstraintSet.LEFT , convertDpToPx(8));
+            constraintSet.connect(textDescription.getId() , ConstraintSet.LEFT , textName.getId() , ConstraintSet.RIGHT , convertDpToPx(8));
+            constraintSet.connect(textDescription.getId() , ConstraintSet.TOP , ConstraintSet.PARENT_ID , ConstraintSet.TOP , convertDpToPx(8));
+            constraintSet.connect(textDescription.getId() , ConstraintSet.BOTTOM , ConstraintSet.PARENT_ID , ConstraintSet.BOTTOM , convertDpToPx(8));
+
+
+
 
 
 
@@ -192,6 +258,15 @@ public class CharacterStatsActivity extends AppCompatActivity {
         intent.putExtra(MainActivity.EXTRA_MESSAGE , index);
         startActivity(intent);
 
+    }
+
+    private int convertDpToPx(int dp){
+        return Math.round(dp*(getResources().getDisplayMetrics().xdpi/DisplayMetrics.DENSITY_DEFAULT));
+
+    }
+
+    private int convertPxToDp(int px){
+        return Math.round(px/(Resources.getSystem().getDisplayMetrics().xdpi/DisplayMetrics.DENSITY_DEFAULT));
     }
 
 
