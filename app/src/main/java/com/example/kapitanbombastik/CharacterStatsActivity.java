@@ -1,6 +1,9 @@
 package com.example.kapitanbombastik;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +23,6 @@ public class CharacterStatsActivity extends AppCompatActivity {
     int index;
     Player currentPlayer;
 
-    ConstraintLayout skillLayout;
-    TextView skillName;
-    TextView skillDescription;
-    TextView skillLevel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +30,6 @@ public class CharacterStatsActivity extends AppCompatActivity {
 
         index = (int) getIntent().getSerializableExtra(MainActivity.EXTRA_MESSAGE);
         currentPlayer = Data.characters.get(index);
-
-        skillLayout = findViewById(R.id.template_skill);
-        skillName = findViewById(R.id.text_skill_name);
-        skillDescription = findViewById(R.id.text_skill_description);
-        skillLevel = findViewById(R.id.value_skill_level);
 
         updateStats(currentPlayer);
 
@@ -155,16 +148,38 @@ public class CharacterStatsActivity extends AppCompatActivity {
 
         for(Skills.Skill s : currentPlayer.skills.skillArrayList){
 
+            //Making ConstraintLayout
+
             ConstraintLayout constraintLayout = new ConstraintLayout(this);
+            constraintLayout.setId(R.id.skillLayout);
+            constraintLayout.setBackgroundColor(getResources().getColor(R.color.GRAY));
+            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT , ConstraintLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(0 , 0 , 0 , 16);
+            constraintLayout.setLayoutParams(layoutParams);
+
             ConstraintSet constraintSet = new ConstraintSet();
 
-            skillName.setText(s.getName());
-            skillDescription.setText(s.getDescription());
-            skillLevel.setText(Integer.toString(s.getLevel()) );
+            //Adding name
 
-            constraintSet.clone(skillLayout);
+            TextView textName = new TextView(this);
+            textName.setText(s.getName());
+            textName.setId(R.id.skillName);
+            textName.setTextColor(getResources().getColor(R.color.ASS));
+            textName.setTypeface(null , Typeface.BOLD);
+            textName.setTextSize(16);
+            constraintLayout.addView(textName);
+
+            constraintSet.constrainHeight(textName.getId() , ConstraintSet.WRAP_CONTENT);
+            constraintSet.constrainWidth(textName.getId() , ConstraintSet.WRAP_CONTENT);
+            constraintSet.connect(textName.getId() , ConstraintSet.LEFT , ConstraintSet.PARENT_ID , ConstraintSet.LEFT , 8);
+            constraintSet.connect(textName.getId() , ConstraintSet.TOP , ConstraintSet.PARENT_ID , ConstraintSet.TOP , 8);
+            constraintSet.connect(textName.getId() , ConstraintSet.BOTTOM , ConstraintSet.PARENT_ID , ConstraintSet.BOTTOM , 8);
+
+            //Adding Upgrade Button
+
+
+
             constraintSet.applyTo(constraintLayout);
-            constraintLayout.setVisibility(View.VISIBLE);
             layout.addView(constraintLayout);
 
         }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="skillLayout" type="id" />
+    <item name="skillName" type="id" />
+    <item name="skillDescription" type="id" />
+    <item name="skillLevelText" type="id" />
+    <item name="skillLevelValue" type="id" />
+    <item name="skillUpgradeButton" type="id" />
+
+</resources>
